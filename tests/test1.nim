@@ -48,70 +48,70 @@ suite "calcFormat":
     let args: seq[string] = @[]
     check("S" == cs[0].calcFormat(args))
 
-suite "calcCLCode1Time":
+suite "calculate1Time":
   test "1回だけ計算する":
-    check("xz(yz)" == "Sxyz".calcCLCode1Time(cs))
+    check("xz(yz)" == "Sxyz".calculate1Time(cs))
   test "これ以上計算できない場合はそのまま返す":
-    check("SS(((SS)S)S)" == "SS(((SS)S)S)".calcCLCode1Time(cs))
+    check("SS(((SS)S)S)" == "SS(((SS)S)S)".calculate1Time(cs))
   test "余っていた引数は末尾に付与される":
-    check("xz(yz)A" == "SxyzA".calcCLCode1Time(cs))
+    check("xz(yz)A" == "SxyzA".calculate1Time(cs))
   test "2回目は計算されない":
-    check("Kz(Iz)" == "SKIz".calcCLCode1Time(cs))
+    check("Kz(Iz)" == "SKIz".calculate1Time(cs))
   test "未定義コンビネータならそのまま返す":
-    check("syz" == "syz".calcCLCode1Time(cs))
+    check("syz" == "syz".calculate1Time(cs))
   test "先頭のコンビネータが括弧でくくられていた場合は括弧を展開する":
-    check("Sxyz" == "(Sxyz)".calcCLCode1Time(cs))
+    check("Sxyz" == "(Sxyz)".calculate1Time(cs))
   test "引数指定なしのコンビネータの場合はそのまま置換":
-    check("K" == "T".calcCLCode1Time(cs))
-    check("SK" == "F".calcCLCode1Time(cs))
+    check("K" == "T".calculate1Time(cs))
+    check("SK" == "F".calculate1Time(cs))
 
-suite "calcCLCode":
+suite "calculate":
   test "計算する":
-    check("xz(yz)" == "Sxyz".calcCLCode(cs))
-    check("xz(yz)A" == "SxyzA".calcCLCode(cs))
-    check("x(xyz)((xy)(xyz))" == "S(x)(xy)(xyz)".calcCLCode(cs))
+    check("xz(yz)" == "Sxyz".calculate(cs))
+    check("xz(yz)A" == "SxyzA".calculate(cs))
+    check("x(xyz)((xy)(xyz))" == "S(x)(xy)(xyz)".calculate(cs))
   test "回数指定で計算する":
-    check("KI(II)" == "SKII".calcCLCode(cs, 1))
-    check("I" == "SKII".calcCLCode(cs, 2))
-    check("I" == "SKII".calcCLCode(cs, 3))
+    check("KI(II)" == "SKII".calculate(cs, 1))
+    check("I" == "SKII".calculate(cs, 2))
+    check("I" == "SKII".calculate(cs, 3))
   test "2回目以降も計算される":
-    check("z" == "SKIz".calcCLCode(cs))
-    check("SKISxyz" == "SKISxyz".calcCLCode(cs, 0))
-    check("KS(IS)xyz" == "SKISxyz".calcCLCode(cs, 1))
-    check("Sxyz" == "SKISxyz".calcCLCode(cs, 2))
-    check("xz(yz)" == "SKISxyz".calcCLCode(cs, 3))
-    check("xz(yz)" == "SKISxyz".calcCLCode(cs, 4))
-    check("xz(yz)" == "SKISxyz".calcCLCode(cs))
-    check("xz(yz)A" == "SKISxyzA".calcCLCode(cs))
-    check("zA((yz)A)" == "SKISSyzA".calcCLCode(cs))
+    check("z" == "SKIz".calculate(cs))
+    check("SKISxyz" == "SKISxyz".calculate(cs, 0))
+    check("KS(IS)xyz" == "SKISxyz".calculate(cs, 1))
+    check("Sxyz" == "SKISxyz".calculate(cs, 2))
+    check("xz(yz)" == "SKISxyz".calculate(cs, 3))
+    check("xz(yz)" == "SKISxyz".calculate(cs, 4))
+    check("xz(yz)" == "SKISxyz".calculate(cs))
+    check("xz(yz)A" == "SKISxyzA".calculate(cs))
+    check("zA((yz)A)" == "SKISSyzA".calculate(cs))
   test "SSSSSS":
-    check("SS(SS)SS" == "SSSSSS".calcCLCode(cs, 1))
-    check("SS((SS)S)S" == "SSSSSS".calcCLCode(cs, 2))
-    check("SS(((SS)S)S)" == "SSSSSS".calcCLCode(cs, 3))
-    check("SS(((SS)S)S)" == "SSSSSS".calcCLCode(cs))
+    check("SS(SS)SS" == "SSSSSS".calculate(cs, 1))
+    check("SS((SS)S)S" == "SSSSSS".calculate(cs, 2))
+    check("SS(((SS)S)S)" == "SSSSSS".calculate(cs, 3))
+    check("SS(((SS)S)S)" == "SSSSSS".calculate(cs))
   test "未定義コンビネータならそのまま返す":
-    check("xyz" == "xyz".calcCLCode(cs))
+    check("xyz" == "xyz".calculate(cs))
   test "空文字のときは空文字を返す":
-   check("" == "".calcCLCode(cs))
+   check("" == "".calculate(cs))
   test "括弧でくくられていても計算する":
-    check("xz(yz)" == "(Sxy)z".calcCLCode(cs))
+    check("xz(yz)" == "(Sxy)z".calculate(cs))
   test "括弧だらけ":
-    check("x" == "(x)".calcCLCode(cs))
-    check("x" == "((((x))))".calcCLCode(cs))
-    check("xy" == "((x)y)".calcCLCode(cs))
-    check("xyz" == "(((x)y)z)".calcCLCode(cs))
-    check("xz(yz)" == "(((S(x))y)z)".calcCLCode(cs))
+    check("x" == "(x)".calculate(cs))
+    check("x" == "((((x))))".calculate(cs))
+    check("xy" == "((x)y)".calculate(cs))
+    check("xyz" == "(((x)y)z)".calculate(cs))
+    check("xz(yz)" == "(((S(x))y)z)".calculate(cs))
   test "引数指定なしのコンビネータの場合はそのまま置換":
-    check("x" == "Txz".calcCLCode(cs))
-    check("z" == "Fxz".calcCLCode(cs))
+    check("x" == "Txz".calculate(cs))
+    check("z" == "Fxz".calculate(cs))
 
-suite "calcCLCodeAndResults":
+suite "calculateAndResults":
   test "2回目以降も計算される":
-    check(@["KS(IS)xyz"] == "SKISxyz".calcCLCodeAndResults(cs, n = 1))
-    check(@["KS(IS)xyz", "Sxyz"] == "SKISxyz".calcCLCodeAndResults(cs, n = 2))
-    check(@["KS(IS)xyz", "Sxyz", "xz(yz)"] == "SKISxyz".calcCLCodeAndResults(cs, n = 3))
-    check(@["KS(IS)xyz", "Sxyz", "xz(yz)"] == "SKISxyz".calcCLCodeAndResults(cs))
+    check(@["KS(IS)xyz"] == "SKISxyz".calculateAndResults(cs, n = 1))
+    check(@["KS(IS)xyz", "Sxyz"] == "SKISxyz".calculateAndResults(cs, n = 2))
+    check(@["KS(IS)xyz", "Sxyz", "xz(yz)"] == "SKISxyz".calculateAndResults(cs, n = 3))
+    check(@["KS(IS)xyz", "Sxyz", "xz(yz)"] == "SKISxyz".calculateAndResults(cs))
   test "計算不可のときは空を返す":
     let empty: seq[string] = @[]
-    check(empty == "xyz".calcCLCodeAndResults(cs))
-    check(empty == "Sxyz".calcCLCodeAndResults(cs, n = 0))
+    check(empty == "xyz".calculateAndResults(cs))
+    check(empty == "Sxyz".calculateAndResults(cs, n = 0))

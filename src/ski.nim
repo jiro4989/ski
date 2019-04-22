@@ -8,7 +8,7 @@ type Combinator* = ref object
   format*: string   ## コンビネータの変換書式。"{0}{1}"という具合に書く。
 
 ## 外部から使うデフォルトのコンビネータ
-let combinators* = [
+let combinators* = @[
   Combinator(name:"S", argsCount:3, format:"{0}{2}({1}{2})"),
   Combinator(name:"K", argsCount:2, format:"{0}"),
   Combinator(name:"I", argsCount:1, format:"{0}"),
@@ -83,7 +83,7 @@ proc calcFormat(co: Combinator, args: openArray[string]): string =
     let f = "{" & $i & "}"
     result = result.replace(f, args[i])
 
-proc calcCLCode1Time(code: string, cs: openArray[Combinator]): string =
+proc calculate1Time(code: string, cs: openArray[Combinator]): string =
   ## 一度だけコンビネータを計算する。
   ## 計算できなかった場合は、計算対象のコードをそのまま返す。
   let
@@ -99,7 +99,7 @@ proc calcCLCode1Time(code: string, cs: openArray[Combinator]): string =
   let co = matched[0]
   result = co.calcFormat(coTuple.args) & coTuple.suffix
 
-proc calcCLCode*(code: string, cs: openArray[Combinator], n: int = -1): string =
+proc calculate*(code: string, cs: openArray[Combinator], n: int = -1): string =
   ## 計算不能になるまでコンビネータ文字列を計算して返す。
   ## 計算不能、とは計算前と計算後の結果が一致する場合、または
   ## 指定した計算回数(n)分計算をした場合を指す。
@@ -108,12 +108,12 @@ proc calcCLCode*(code: string, cs: openArray[Combinator], n: int = -1): string =
     return code
   if -1 < m:
     dec m
-  let ret = code.calcCLCode1Time cs
+  let ret = code.calculate1Time cs
   if code == ret:
     return code
-  result = ret.calcCLCode(cs, m)
+  result = ret.calculate(cs, m)
 
-proc calcCLCodeAndResults*(code: string, cs: openArray[Combinator], results: seq[string] = @[], n: int = -1): seq[string] =
+proc calculateAndResults*(code: string, cs: openArray[Combinator], results: seq[string] = @[], n: int = -1): seq[string] =
   ## 計算不能になるまでコンビネータ文字列を計算して、計算過程とともに返す。
   ## 計算不能、とは計算前と計算後の結果が一致する場合、または
   ## 指定した計算回数(n)分計算をした場合を指す。
@@ -122,9 +122,9 @@ proc calcCLCodeAndResults*(code: string, cs: openArray[Combinator], results: seq
     return results
   if -1 < m:
     dec m
-  let ret = code.calcCLCode1Time cs
+  let ret = code.calculate1Time cs
   if code == ret:
     return results
   var nr = results
   nr.add ret
-  result = ret.calcCLCodeAndResults(cs, nr, m)
+  result = ret.calculateAndResults(cs, nr, m)
