@@ -16,9 +16,7 @@ task docs, "Generate documents":
 
 task examples, "Execute example programs":
   withDir "examples/calc_args":
-    exec "nim c -d:release main.nim"
-    exec "./main Sxyz"
+    exec "nim c -r main.nim Sxyz"
   exec "echo ---------------------"
   withDir "examples/read_file":
-    exec "nim c -d:release main.nim"
-    exec "./main"
+    exec "nim c -r main.nim"

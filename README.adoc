@@ -53,8 +53,7 @@ Run
 
 [source,bash]
 cd examples/calc_args
-nim c main.nim
-./main Sxyz
+nim c -r main.nim Sxyz
 
 Output
 
@@ -67,8 +66,7 @@ Run
 
 [source,bash]
 cd examples/read_file
-nim c main.nim
-./main
+nim c -r main.nim
 
 Output
 
