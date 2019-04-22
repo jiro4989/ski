@@ -39,14 +39,14 @@ suite "takeCombinator":
   test "引数不足ならargsは空":
     check((combinator: "S", args: @["x", "y"], suffix: "") == "Sxy".takeCombinator(cs))
 
-suite "calcFormat":
+suite "calculateFormat":
   test "置換処理を実行する":
-    check("xz(yz)" == cs[0].calcFormat(["x", "y", "z"]))
-    check("(abc)(ghi)((def)(ghi))" == cs[0].calcFormat(["(abc)", "(def)", "(ghi)"]))
+    check("xz(yz)" == cs[0].calculateFormat(["x", "y", "z"]))
+    check("(abc)(ghi)((def)(ghi))" == cs[0].calculateFormat(["(abc)", "(def)", "(ghi)"]))
   test "コンビネータの引数が不足していると、そのまま返す":
-    check("Sx" == cs[0].calcFormat(["x"]))
+    check("Sx" == cs[0].calculateFormat(["x"]))
     let args: seq[string] = @[]
-    check("S" == cs[0].calcFormat(args))
+    check("S" == cs[0].calculateFormat(args))
 
 suite "calculate1Time":
   test "1回だけ計算する":

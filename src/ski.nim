@@ -72,7 +72,7 @@ proc takeCombinator(code: string, cs: openArray[Combinator]): tuple[combinator: 
   let joined = pref & args.join("")
   return (pref, args, code.substr joined.len)
 
-proc calcFormat(co: Combinator, args: openArray[string]): string =
+proc calculateFormat(co: Combinator, args: openArray[string]): string =
   ## コンビネータの変換書式に、引数を適用して返す。
   ## 引数が不足した場合は、コンビネータ名と引数を結合して返す。
   if args.len < co.argsCount:
@@ -97,7 +97,7 @@ proc calculate1Time(code: string, cs: openArray[Combinator]): string =
     else:
       return code
   let co = matched[0]
-  result = co.calcFormat(coTuple.args) & coTuple.suffix
+  result = co.calculateFormat(coTuple.args) & coTuple.suffix
 
 proc calculate*(code: string, cs: openArray[Combinator], n: int = -1): string =
   ## 計算不能になるまでコンビネータ文字列を計算して返す。
