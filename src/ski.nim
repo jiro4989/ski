@@ -7,6 +7,17 @@ type Combinator* = ref object
   argsCount*: int   ## コンビネータが必要とする引数の数
   format*: string   ## コンビネータの変換書式。"{0}{1}"という具合に書く。
 
+## 外部から使うデフォルトのコンビネータ
+let combinators* = [
+  Combinator(name:"S", argsCount:3, format:"{0}{2}({1}{2})"),
+  Combinator(name:"K", argsCount:2, format:"{0}"),
+  Combinator(name:"I", argsCount:1, format:"{0}"),
+  Combinator(name:"B", argsCount:3, format:"{0}({1}{2})"),
+  Combinator(name:"C", argsCount:3, format:"({0}{2}){1}"),
+  Combinator(name:"T", argsCount:0, format:"K"),
+  Combinator(name:"F", argsCount:0, format:"SK"),
+]
+
 proc takeBracketCombinator(code: string): string =
   ## 先頭の括弧"()"で括られた文字列を返す。
   ## このプロシージャ自体は括弧の整合性をチェックしないので

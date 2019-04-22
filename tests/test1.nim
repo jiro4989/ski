@@ -2,11 +2,7 @@ import unittest
 
 include ski
 
-let cs = [
-    Combinator(name:"S", argsCount:3, format:"{0}{2}({1}{2})"),
-    Combinator(name:"K", argsCount:2, format:"{0}"),
-    Combinator(name:"I", argsCount:1, format:"{0}"),
-    ]
+let cs = combinators
 
 suite "takePrefixCombinator":
   test "先頭の文字を返す":
