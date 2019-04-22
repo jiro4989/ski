@@ -8,4 +8,6 @@ let combinators = readFile("examples/read_file.json").parseJson.to(seq[Combinato
 # Read and calculate from text file
 let strm = newFileStream("examples/read_file.txt")
 for line in strm.lines:
-  echo line & " -> " & line.calculate(combinators)
+  echo line
+  for ret in line.calculateAndResults(combinators):
+    echo "  -> " & ret
