@@ -61,6 +61,9 @@ suite "calcCLCode1Time":
     check("syz" == "syz".calcCLCode1Time(cs))
   test "先頭のコンビネータが括弧でくくられていた場合は括弧を展開する":
     check("Sxyz" == "(Sxyz)".calcCLCode1Time(cs))
+  test "引数指定なしのコンビネータの場合はそのまま置換":
+    check("K" == "T".calcCLCode1Time(cs))
+    check("SK" == "F".calcCLCode1Time(cs))
 
 suite "calcCLCode":
   test "計算する":
@@ -98,6 +101,9 @@ suite "calcCLCode":
     check("xy" == "((x)y)".calcCLCode(cs))
     check("xyz" == "(((x)y)z)".calcCLCode(cs))
     check("xz(yz)" == "(((S(x))y)z)".calcCLCode(cs))
+  test "引数指定なしのコンビネータの場合はそのまま置換":
+    check("x" == "Txz".calcCLCode(cs))
+    check("z" == "Fxz".calcCLCode(cs))
 
 suite "calcCLCodeAndResults":
   test "2回目以降も計算される":
