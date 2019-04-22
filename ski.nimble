@@ -10,3 +10,6 @@ srcDir        = "src"
 # Dependencies
 
 requires "nim >= 0.19.4"
+
+task docs, "Generate documents":
+  exec "nimble doc src/ski.nim -o:docs/ski.html"
