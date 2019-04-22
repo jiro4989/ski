@@ -78,6 +78,11 @@ nim c -r examples/read_file.nim
     -> IIS
     -> IS
     -> S
+  S<true><true><false>
+    -> <true><false>(<true><false>)
+    -> K<false>(<true><false>)
+    -> <false>
+    -> SK
 
 == Document
 
