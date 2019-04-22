@@ -15,5 +15,10 @@ task docs, "Generate documents":
   exec "nimble doc src/ski.nim -o:docs/ski.html"
 
 task examples, "Execute example programs":
-  exec "nim c -r examples/calc_args.nim Sxyz"
-  exec "nim c -r examples/read_file.nim"
+  withDir "examples/calc_args":
+    exec "nim c -d:release main.nim"
+    exec "./main Sxyz"
+  exec "echo ---------------------"
+  withDir "examples/read_file":
+    exec "nim c -d:release main.nim"
+    exec "./main"
