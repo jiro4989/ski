@@ -31,7 +31,7 @@ nimble install ski
 
 == Usage
 
-Simple example is here.
+=== Simple examples
 
 [source,nim]
 ----
