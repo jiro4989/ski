@@ -47,18 +47,30 @@ Output is `xz(yz)` .
 See `examples` directory.
 Run example code.
 
+==== Calc arguments example
+
+Run
+
 [source,bash]
 cd examples/calc_args
 nim c main.nim
 ./main Sxyz
 
+Output
+
   Before : Sxyz
   After  : xz(yz)
+
+==== Read file example
+
+Run
 
 [source,bash]
 cd examples/read_file
 nim c main.nim
 ./main
+
+Output
 
   Sxyz
     -> xz(yz)
