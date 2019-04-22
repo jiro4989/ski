@@ -48,12 +48,17 @@ See `examples` directory.
 Run example code.
 
 [source,bash]
-nim c -r examples/calc_args.nim Sxyz
+cd examples/calc_args
+nim c main.nim
+./main Sxyz
 
-  xz(yz)
+  Before : Sxyz
+  After  : xz(yz)
 
 [source,bash]
-nim c -r examples/read_file.nim
+cd examples/read_file
+nim c main.nim
+./main
 
   Sxyz
     -> xz(yz)
