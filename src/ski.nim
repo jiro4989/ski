@@ -1,4 +1,4 @@
-## ski is module for `SKI Combinator <https://en.wikipedia.org/wiki/SKI_combinator_calculus>`_.
+## ski is module for calculating `SKI Combinator <https://en.wikipedia.org/wiki/SKI_combinator_calculus>`_.
 ##
 ## Basic usage
 ## ===========

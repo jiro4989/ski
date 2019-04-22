@@ -2,7 +2,7 @@
 
 version       = "1.0.0"
 author        = "jiro4989"
-description   = "SKI combinator library"
+description   = "ski is library for SKI combinator."
 license       = "MIT"
 srcDir        = "src"
 
