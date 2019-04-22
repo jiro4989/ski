@@ -1,0 +1,7 @@
+[
+    {"name":"S", "argsCount":3, "format":"{0}{2}({1}{2})"},
+    {"name":"K", "argsCount":2, "format":"{0}"},
+    {"name":"I", "argsCount":1, "format":"{0}"},
+    {"name":"<true>", "argsCount":0, "format":"K"},
+    {"name":"<false>", "argsCount":0, "format":"SK"}
+]
