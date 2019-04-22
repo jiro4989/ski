@@ -1,7 +1,7 @@
 :toc: left
 :sectnums:
 
-= pnm
+= ski
 
 Library for calculating https://en.wikipedia.org/wiki/SKI_combinator_calculus[SKI combinator].
 
