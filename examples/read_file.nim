@@ -11,3 +11,4 @@ for line in strm.lines:
   echo line
   for ret in line.calculateAndResults(combinators):
     echo "  -> " & ret
+strm.close
