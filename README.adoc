@@ -50,7 +50,7 @@ Run example code.
 [source,bash]
 nim c -r examples/calc_args.nim Sxyz
 
-  xz(uz)
+  xz(yz)
 
 [source,bash]
 nim c -r examples/read_file.nim
