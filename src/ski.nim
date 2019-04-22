@@ -1,4 +1,5 @@
-import strutils, sequtils
+import strutils
+from sequtils import filterIt
 
 type Combinator* = ref object
   ## コンビネータ
