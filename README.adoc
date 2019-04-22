@@ -50,40 +50,34 @@ Run example code.
 [source,bash]
 nim c -r examples/calc_args.nim Sxyz
 
-[quote]
-____
-xz(uz)
-____
+  xz(uz)
 
 [source,bash]
 nim c -r examples/read_file.nim
 
-[quote]
-____
-Sxyz
-  -> xz(yz)
-SKxz
-  -> Kz(xz)
-  -> z
-<true>xz
-  -> Kxz
-  -> x
-<false>xz
-  -> SKxz
-  -> Kz(xz)
-  -> z
-SKIKSIKIKISKIKIS
-  -> KK(IK)SIKIKISKIKIS
-  -> KSIKIKISKIKIS
-  -> SKIKISKIKIS
-  -> KK(IK)ISKIKIS
-  -> KISKIKIS
-  -> IKIKIS
-  -> KIKIS
-  -> IIS
-  -> IS
-  -> S
-____
+  Sxyz
+    -> xz(yz)
+  SKxz
+    -> Kz(xz)
+    -> z
+  <true>xz
+    -> Kxz
+    -> x
+  <false>xz
+    -> SKxz
+    -> Kz(xz)
+    -> z
+  SKIKSIKIKISKIKIS
+    -> KK(IK)SIKIKISKIKIS
+    -> KSIKIKISKIKIS
+    -> SKIKISKIKIS
+    -> KK(IK)ISKIKIS
+    -> KISKIKIS
+    -> IKIKIS
+    -> KIKIS
+    -> IIS
+    -> IS
+    -> S
 
 == Document
 
