@@ -9,6 +9,6 @@ let combinators = readFile("combinators.json").parseJson.to(seq[Combinator])
 let strm = newFileStream("in.txt")
 for line in strm.lines:
   echo line
-  for ret in line.calculateAndResults(combinators):
+  for ret in line.calculateIterator(combinators):
     echo "  -> " & ret
 strm.close
