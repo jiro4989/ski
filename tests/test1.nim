@@ -105,13 +105,36 @@ suite "calculate":
     check("x" == "Txz".calculate(cs))
     check("z" == "Fxz".calculate(cs))
 
-suite "calculateAndResults":
+suite "calculateSeq":
   test "2回目以降も計算される":
-    check(@["KS(IS)xyz"] == "SKISxyz".calculateAndResults(cs, n = 1))
-    check(@["KS(IS)xyz", "Sxyz"] == "SKISxyz".calculateAndResults(cs, n = 2))
-    check(@["KS(IS)xyz", "Sxyz", "xz(yz)"] == "SKISxyz".calculateAndResults(cs, n = 3))
-    check(@["KS(IS)xyz", "Sxyz", "xz(yz)"] == "SKISxyz".calculateAndResults(cs))
+    check(@["KS(IS)xyz"] == "SKISxyz".calculateSeq(cs, n = 1))
+    check(@["KS(IS)xyz", "Sxyz"] == "SKISxyz".calculateSeq(cs, n = 2))
+    check(@["KS(IS)xyz", "Sxyz", "xz(yz)"] == "SKISxyz".calculateSeq(cs, n = 3))
+    check(@["KS(IS)xyz", "Sxyz", "xz(yz)"] == "SKISxyz".calculateSeq(cs))
   test "計算不可のときは空を返す":
     let empty: seq[string] = @[]
-    check(empty == "xyz".calculateAndResults(cs))
-    check(empty == "Sxyz".calculateAndResults(cs, n = 0))
+    check(empty == "xyz".calculateSeq(cs))
+    check(empty == "Sxyz".calculateSeq(cs, n = 0))
+  
+suite "calculateIterator":
+  test "計算回数が1回":
+    var ret: seq[string]
+    for r in "Sxyz".calculateIterator(cs):
+      ret.add r
+    check ret == @["xz(yz)"]
+  test "計算回数が3回":
+    var ret: seq[string]
+    for r in "SKISxyz".calculateIterator(cs):
+      ret.add r
+    check ret == @["KS(IS)xyz", "Sxyz", "xz(yz)"]
+  test "計算回数が0回":
+    var ret: seq[string]
+    for r in "x".calculateIterator(cs):
+      ret.add r
+    var empty: seq[string]
+    check ret == empty
+  test "計算回数を2回に指定":
+    var ret: seq[string]
+    for r in "SKISxyz".calculateIterator(cs, 2):
+      ret.add r
+    check ret == @["KS(IS)xyz", "Sxyz"]

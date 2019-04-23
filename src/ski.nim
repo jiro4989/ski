@@ -164,7 +164,7 @@ proc calculate*(code: string, cs: openArray[Combinator], n: int = -1): string =
     return code
   result = ret.calculate(cs, m)
 
-proc calculateAndResults*(code: string, cs: openArray[Combinator], results: seq[string] = @[], n: int = -1): seq[string] =
+proc calculateSeq*(code: string, cs: openArray[Combinator], results: seq[string] = @[], n: int = -1): seq[string] =
   ## Returns process and results of repeat calculation.
   ## Count of calculation is `n`.
   ## Calculate until `code` can not be calculated when `n` is `-1`.
@@ -175,9 +175,9 @@ proc calculateAndResults*(code: string, cs: openArray[Combinator], results: seq[
   ## 計算不能、とは計算前と計算後の結果が一致する場合、または
   ## 指定した計算回数(n)分計算をした場合を指す。
   runnableExamples:
-    doAssert "Sxyz".calculateAndResults(combinators) == @["xz(yz)"]
-    doAssert "KKaxyz".calculateAndResults(combinators) == @["Kxyz", "xz"]
-    doAssert "KKaxyz".calculateAndResults(combinators, n=1) == @["Kxyz"]
+    doAssert "Sxyz".calculateSeq(combinators) == @["xz(yz)"]
+    doAssert "KKaxyz".calculateSeq(combinators) == @["Kxyz", "xz"]
+    doAssert "KKaxyz".calculateSeq(combinators, n=1) == @["Kxyz"]
   var m = n
   if m == 0:
     return results
@@ -188,4 +188,31 @@ proc calculateAndResults*(code: string, cs: openArray[Combinator], results: seq[
     return results
   var nr = results
   nr.add ret
-  result = ret.calculateAndResults(cs, nr, m)
+  result = ret.calculateSeq(cs, nr, m)
+
+iterator calculateIterator*(code: string, cs: openArray[Combinator], n: int = -1): string =
+  ## Returns process and results of repeat calculation.
+  ## Count of calculation is `n`.
+  ## Calculate until `code` can not be calculated when `n` is `-1`.
+  ##
+  ## **Japanese:**
+  ##
+  ## 計算不能になるまでコンビネータ文字列を計算して、計算過程とともに返す。
+  ## 計算不能、とは計算前と計算後の結果が一致する場合、または
+  ## 指定した計算回数(n)分計算をした場合を指す。
+  runnableExamples:
+    var ret: seq[string]
+    for r in "SKISxyz".calculateIterator(combinators):
+      ret.add r
+    doAssert ret == @["KS(IS)xyz", "Sxyz", "xz(yz)"]
+  if n != 0:
+    var m = n
+    var code2 = code
+    while m == -1 or 0 < m:
+      let ret = code2.calculate1Time cs
+      if code2 == ret:
+        break
+      yield ret
+      code2 = ret
+      if -1 < m:
+        dec m
