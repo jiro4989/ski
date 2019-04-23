@@ -14,14 +14,14 @@ requires "nim >= 0.19.4"
 task docs, "Generate documents":
   exec "nimble doc src/ski.nim -o:docs/ski.html"
 
-task examples, "Execute example programs":
+task examples, "Run example programs":
   withDir "examples/calc_args":
     exec "nim c -r main.nim Sxyz"
   exec "echo ---------------------"
   withDir "examples/read_file":
     exec "nim c -r main.nim"
 
-task runCI, "Run CI tasks":
+task ci, "Run CI tasks":
   exec "nimble test"
   exec "nimble docs"
   exec "nimble examples"
