@@ -1,6 +1,6 @@
 # Package
 
-version       = "1.0.0"
+version       = "1.1.0"
 author        = "jiro4989"
 description   = "ski is library for SKI combinator."
 license       = "MIT"
@@ -20,3 +20,8 @@ task examples, "Execute example programs":
   exec "echo ---------------------"
   withDir "examples/read_file":
     exec "nim c -r main.nim"
+
+task runCI, "Run CI tasks":
+  exec "nimble test"
+  exec "nimble docs"
+  exec "nimble examples"
