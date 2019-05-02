@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SKI combinator calculator</title>
+  <script src="js/skijs.js"></script>
+  <script>
+    function calcAndSetResult() {
+      let resultArea = document.getElementById("resultArea");
+      resultArea.innerHTML = "";
+
+      let before = document.getElementById("inputCombinator").value;
+      let i = 0;
+      while (true) {
+        i++;
+        let after = calculate(before);
+        if (before === after) break;
+        resultArea.innerHTML += i + ". " + after + "\n";
+        before = after;
+      }
+    }
+  </script>
+</head>
+
+<body>
+
+  <div>
+    <h1>SKI combinator calculator</h1>
+    <hr>
+  </div>
+
+  <div>
+    <label for="inputCombinator">
+      Input combinator:
+      <input type="text" id="inputCombinator" autofocus="true" size="80">
+    </label>
+    <br>
+    <input type="button" value="Calculate" onclick="calcAndSetResult();">
+    <hr>
+  </div>
+
+  <div>
+    Result:<br>
+    <textarea name="" id="resultArea" cols="100" rows="20"></textarea>
+  </div>
+
+</body>
+
+</html>
