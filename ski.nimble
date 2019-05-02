@@ -1,6 +1,6 @@
 # Package
 
-version       = "1.1.0"
+version       = "1.2.0"
 author        = "jiro4989"
 description   = "ski is library for SKI combinator."
 license       = "MIT"
