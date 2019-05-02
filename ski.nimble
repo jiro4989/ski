@@ -25,3 +25,6 @@ task ci, "Run CI tasks":
   exec "nimble test"
   exec "nimble docs"
   exec "nimble examples"
+
+task buildjs, "Build JS library":
+  exec "nimble js -o:docs/js/skijs.js src/skijs.nim"
