@@ -1424,7 +1424,7 @@ function calculate_145567(code_145569, cs_145571, n_145573) {
 function calculate(s_146016) {
 	var result_146017 = null;
 
-	var F={procname:"skijs.calculate",prev:framePtr,filename:"skijs.nim",line:0};
+	var F={procname:"ski_js.calculate",prev:framePtr,filename:"ski_js.nim",line:0};
 	framePtr = F;
 		F.line = 4;
 		result_146017 = toJSStr(calculate_145567(cstrToNimstr(s_146016), combinators_145038, 1));
