@@ -103,7 +103,7 @@ Output
 
 * https://jiro4989.github.io/ski/ski.html
 
-== Web application of Game of Life
+== Web application of SKI combinator calculator
 
 I created simple SKI combinator calculator on web application.
 
